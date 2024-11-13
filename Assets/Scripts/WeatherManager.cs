@@ -42,7 +42,7 @@ public class WeatherManager : MonoBehaviour
     public void UpdateWeather()
     {
         string value = $"http://api.openweathermap.org/data/2.5/weather?q={towns[townID]}&mode=json&appid={APIKEY}";
-        StartCoroutine(CallAPI(value, null));
+        StartCoroutine(CallAPI(value, PostAPI));
     }
 
     private IEnumerator CallAPI(string url, Action<string> callback)
@@ -65,5 +65,8 @@ public class WeatherManager : MonoBehaviour
         }
     }
 
-
+    public void PostAPI(string json)
+    {
+        WeatherAPIProfile profile = new(json);
+    }
 }
