@@ -41,15 +41,11 @@ public class WeatherManager : MonoBehaviour
 
     }
 
-
+    private string URL => $"http://api.openweathermap.org/data/2.5/weather?q={towns[townID]}&mode=json&appid={APIKEY}";
 
     private const string APIKEY = "c7ce360dc9c6e5c1353d0aaa5ab7a187";
 
-    public void UpdateWeather()
-    {
-        string value = $"http://api.openweathermap.org/data/2.5/weather?q={towns[townID]}&mode=json&appid={APIKEY}";
-        StartCoroutine(CallAPI(value, PostAPI));
-    }
+    public void UpdateWeather() => StartCoroutine(CallAPI(URL, PostAPI));
 
     private IEnumerator CallAPI(string url, Action<string> callback)
     {
