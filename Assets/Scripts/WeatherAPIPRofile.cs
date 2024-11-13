@@ -1,79 +1,80 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 
-[System.Serializable]
+[Serializable]
 public class WeatherAPIProfile
 {
-    public Coord coord { get; set; }
-    public Weather[] weather { get; set; }
-    public string _base { get; set; }
-    public Main main { get; set; }
-    public int visibility { get; set; }
-    public Wind wind { get; set; }
-    public Rain rain { get; set; }
-    public Clouds clouds { get; set; }
-    public int dt { get; set; }
-    public Sys sys { get; set; }
-    public int timezone { get; set; }
-    public int id { get; set; }
-    public string name { get; set; }
-    public int cod { get; set; }
+    public Coord coord;
+    public Weather[] weather;
+    public string _base;
+    public Main main;
+    public int visibility;
+    public Wind wind;
+    public Rain rain;
+    public Clouds clouds;
+    public int dt;
+    public Sys sys;
+    public int timezone;
+    public int id;
+    public string name;
+    public int cod;
 
-
+    [Serializable]
     public class Coord
     {
-        public float lon { get; set; }
-        public float lat { get; set; }
+        public float lon;
+        public float lat;
     }
-
+    [Serializable]
     public class Main
     {
-        public float temp { get; set; }
-        public float feels_like { get; set; }
-        public float temp_min { get; set; }
-        public float temp_max { get; set; }
-        public int pressure { get; set; }
-        public int humidity { get; set; }
-        public int sea_level { get; set; }
-        public int grnd_level { get; set; }
+        public float temp;
+        public float feels_like;
+        public float temp_min;
+        public float temp_max;
+        public int pressure;
+        public int humidity;
+        public int sea_level;
+        public int grnd_level;
     }
-
+    [Serializable]
     public class Wind
     {
-        public float speed { get; set; }
-        public int deg { get; set; }
-        public float gust { get; set; }
+        public float speed;
+        public int deg;
+        public float gust;
     }
-
+    [Serializable]
     public class Rain
     {
-        public float _1h { get; set; }
+        public float _1h;
     }
-
+    [Serializable]
     public class Clouds
     {
-        public int all { get; set; }
+        public int all;
     }
-
+    [Serializable]
     public class Sys
     {
-        public int type { get; set; }
-        public int id { get; set; }
-        public string country { get; set; }
-        public int sunrise { get; set; }
-        public int sunset { get; set; }
+        public int type;
+        public int id;
+        public string country;
+        public int sunrise;
+        public int sunset;
     }
-
+    [Serializable]
     public class Weather
     {
-        public int id { get; set; }
-        public string main { get; set; }
-        public string description { get; set; }
-        public string icon { get; set; }
+        public int id;
+        public string main;
+        public string description;
+        public string icon;
     }
 
 
-    public WeatherAPIProfile(string json) => JsonUtility.FromJson<WeatherAPIProfile>(json);
+    public static WeatherAPIProfile FromJson(string json) => JsonUtility.FromJson<WeatherAPIProfile>(json);
 
 }
