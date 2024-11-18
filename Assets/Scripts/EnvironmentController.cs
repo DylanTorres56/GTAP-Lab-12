@@ -9,7 +9,7 @@ public class EnvironmentController : MonoBehaviour
 {
     public List<SkyboxType> skyboxList;
     public Material skyboxMat;
-    public Light light;
+    public Light skyLight;
 
     private void OnEnable()
     {
@@ -28,6 +28,19 @@ public class EnvironmentController : MonoBehaviour
         {
             skyboxMat = skybox.skyboxNight;
         }
+
+    }
+    private void UpdateLight(WeatherAPIProfile profile) 
+    {
+        if (profile.IsDaytime)
+        {
+            //skyLight.intensity = 
+        }
+        else 
+        {
+            //skyLight.intensity = 
+        }
+
 
     }
 
