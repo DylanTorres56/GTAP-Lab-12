@@ -77,4 +77,9 @@ public class WeatherAPIProfile
 
     public static WeatherAPIProfile FromJson(string json) => JsonUtility.FromJson<WeatherAPIProfile>(json);
 
+    public string WeatherName => weather[0].main;
+
+
+
+
 }

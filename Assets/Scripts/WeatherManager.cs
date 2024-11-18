@@ -17,6 +17,8 @@ public class WeatherManager : MonoBehaviour
 
     public TMPro.TextMeshPro debugText;
 
+    public Action<WeatherAPIProfile> onGetEvent;
+
     private void Awake()
     {
         UpdateWeather();
@@ -72,7 +74,7 @@ public class WeatherManager : MonoBehaviour
 
         // Do data change with the Weather data.
 
-
+        onGetEvent.Invoke(profile);
 
     }
     public WeatherAPIProfile profile;
