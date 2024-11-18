@@ -15,8 +15,16 @@ public class WeatherManager : MonoBehaviour
 
     private float autoUpdateTimer = 0;
 
+    public TMPro.TextMeshPro debugText;
 
-    public void Awake()
+    public Action<WeatherAPIProfile> onGetEvent;
+
+    private void Awake()
+    {
+        UpdateWeather();
+    }
+
+    public void Update()
     {
         autoUpdateTimer += Time.deltaTime;
         if(autoUpdateTimer >= autoUpdateRate)
@@ -35,35 +43,40 @@ public class WeatherManager : MonoBehaviour
 
     }
 
-
+    private string URL => $"http://api.openweathermap.org/data/2.5/weather?q={towns[townID]}&mode=json&appid={APIKEY}";
 
     private const string APIKEY = "c7ce360dc9c6e5c1353d0aaa5ab7a187";
 
-    public void UpdateWeather()
-    {
-        string value = $"http://api.openweathermap.org/data/2.5/weather?q={towns[townID]}&mode=json&appid={APIKEY}";
-        StartCoroutine(CallAPI(value, null));
-    }
+    public void UpdateWeather() => StartCoroutine(CallAPI(URL, PostAPI));
 
     private IEnumerator CallAPI(string url, Action<string> callback)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        using var request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            yield return request.SendWebRequest();
-            if (request.result == UnityWebRequest.Result.ConnectionError)
-            {
-                Debug.LogError($"network problem: {request.error}");
-            }
-            else if (request.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError($"response error: {request.responseCode}");
-            }
-            else
-            {
-                callback(request.downloadHandler.text);
-            }
+            Debug.LogError($"network problem: {request.error}");
+        }
+        else if (request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError($"response error: {request.responseCode}");
+        }
+        else
+        {
+            callback.Invoke(request.downloadHandler.text);
         }
     }
 
+    public void PostAPI(string json)
+    {
+        debugText.text = json;
+        profile = WeatherAPIProfile.FromJson(json);
 
+        // Do data change with the Weather data.
+
+        onGetEvent?.Invoke(profile);
+
+    }
+    public WeatherAPIProfile profile;
 }
+ 
