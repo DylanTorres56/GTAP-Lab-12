@@ -6,6 +6,8 @@ using UnityEngine;
 public class EnvironmentController : MonoBehaviour
 {
     public List<SkyboxType> skyboxList;
+    public Material skyboxMat;
+    public Light light;
 
     private void OnEnable()
     {
