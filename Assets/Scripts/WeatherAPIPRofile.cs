@@ -80,7 +80,15 @@ public class WeatherAPIProfile
     public string WeatherName => weather[0].main;
 
     //DO THING
-    public bool IsDaytime { get; set; }
+    public bool IsDaytime { get 
+        {
+            float time = (float)DateTime.UtcNow.TimeOfDay.TotalSeconds - timezone;
+            if (time > 43200)
+            {
+                return true;
+            }
+            return false;
+        } }
 
 
 }
