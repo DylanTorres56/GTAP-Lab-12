@@ -17,7 +17,7 @@ public class WeatherManager : MonoBehaviour
 
     public TMPro.TextMeshPro debugText;
 
-    public Action<WeatherAPIProfile> onGetEvent;
+    public static Action<WeatherAPIProfile> onGetEvent;
 
     private void Awake()
     {

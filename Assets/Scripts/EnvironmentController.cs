@@ -1,9 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnvironmentController : MonoBehaviour
 {
+    public List<SkyboxType> skyboxList;
+
+    private void OnEnable()
+    {
+        WeatherManager.onGetEvent += UpdateSkybox;
+    }
+
+    private void UpdateSkybox(WeatherAPIProfile profile)
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +30,10 @@ public class EnvironmentController : MonoBehaviour
     }
 }
 
-struct SkyboxType 
+[Serializable]
+public struct SkyboxType 
 {
-    string skyboxName;
-    Material skyboxMat;
+    [SerializeField] string skyboxName;
+    [SerializeField] Material skyboxDay;
+    [SerializeField] Material skyboxNight;
 }
