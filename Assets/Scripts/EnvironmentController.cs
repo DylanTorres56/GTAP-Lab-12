@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class EnvironmentController : MonoBehaviour
 {
@@ -17,6 +19,14 @@ public class EnvironmentController : MonoBehaviour
     private void UpdateSkybox(WeatherAPIProfile profile)
     {
         
+    }
+
+    public SkyboxType GetSkybox(WeatherAPIProfile profile)
+    {
+        SkyboxType chosenSkybox = skyboxList.FirstOrDefault(x => x.skyboxName == profile.WeatherName);
+        if (chosenSkybox.skyboxName == "" || chosenSkybox.skyboxName == null)
+            chosenSkybox = skyboxList[0];
+        return chosenSkybox;
     }
 
     // Start is called before the first frame update
@@ -35,7 +45,7 @@ public class EnvironmentController : MonoBehaviour
 [Serializable]
 public struct SkyboxType 
 {
-    [SerializeField] string skyboxName;
-    [SerializeField] Material skyboxDay;
-    [SerializeField] Material skyboxNight;
+    public string skyboxName;
+    public Material skyboxDay;
+    public Material skyboxNight;
 }

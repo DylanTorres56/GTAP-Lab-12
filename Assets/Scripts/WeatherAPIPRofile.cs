@@ -79,7 +79,8 @@ public class WeatherAPIProfile
 
     public string WeatherName => weather[0].main;
 
-
+    //DO THING
+    public bool IsDaytime { get; set; }
 
 
 }
