@@ -18,12 +18,22 @@ public class EnvironmentController : MonoBehaviour
 
     private void UpdateSkybox(WeatherAPIProfile profile)
     {
-        
+        SkyboxType skybox = GetSkybox(profile.WeatherName);
+        if (profile.IsDaytime)
+        {
+            skyboxMat = skybox.skyboxDay;
+
+        }
+        else
+        {
+            skyboxMat = skybox.skyboxNight;
+        }
+
     }
 
-    public SkyboxType GetSkybox(WeatherAPIProfile profile)
+    public SkyboxType GetSkybox(string WeatherName)
     {
-        SkyboxType chosenSkybox = skyboxList.FirstOrDefault(x => x.skyboxName == profile.WeatherName);
+        SkyboxType chosenSkybox = skyboxList.FirstOrDefault(x => x.skyboxName ==WeatherName);
         if (chosenSkybox.skyboxName == "" || chosenSkybox.skyboxName == null)
             chosenSkybox = skyboxList[0];
         return chosenSkybox;
