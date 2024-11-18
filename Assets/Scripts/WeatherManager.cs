@@ -74,7 +74,7 @@ public class WeatherManager : MonoBehaviour
 
         // Do data change with the Weather data.
 
-        onGetEvent.Invoke(profile);
+        onGetEvent?.Invoke(profile);
 
     }
     public WeatherAPIProfile profile;
