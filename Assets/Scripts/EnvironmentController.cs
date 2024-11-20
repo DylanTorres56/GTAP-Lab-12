@@ -8,12 +8,12 @@ using UnityEngine.Profiling;
 public class EnvironmentController : MonoBehaviour
 {
     public List<SkyboxType> skyboxList;
-    public Material skyboxMat;
+    //public Material skyboxMat;
     public Light skyLight;
 
     private void OnEnable()
     {
-        WeatherManager.onGetEvent += UpdateSkybox;
+        WeatherManager.onGetEvent += (profile) => { UpdateSkybox(profile); UpdateLight(profile); };
     }
 
     private void UpdateSkybox(WeatherAPIProfile profile)
@@ -21,12 +21,12 @@ public class EnvironmentController : MonoBehaviour
         SkyboxType skybox = GetSkybox(profile.WeatherName);
         if (profile.IsDaytime)
         {
-            skyboxMat = skybox.skyboxDay;
+            RenderSettings.skybox = skybox.skyboxDay;
 
         }
         else
         {
-            skyboxMat = skybox.skyboxNight;
+            RenderSettings.skybox = skybox.skyboxNight;
         }
 
     }
@@ -34,11 +34,15 @@ public class EnvironmentController : MonoBehaviour
     {
         if (profile.IsDaytime)
         {
-            //skyLight.intensity = 
+            skyLight.intensity = 1;
+            RenderSettings.ambientIntensity = 1;
+            skyLight.color = Color.white;
         }
         else 
         {
-            //skyLight.intensity = 
+            skyLight.intensity = 0.25f;
+            RenderSettings.ambientIntensity = 0.25f;
+            skyLight.color = Color.blue;
         }
 
 
