@@ -15,10 +15,10 @@ MonoBehaviour:
   DevAccountEmail: glaciershield@gmail.com
   DevAccountToken: h9wqj44ct7ndp15c3ef7ykg6auf796bwxj14eun8t4wiiz5n933jop1car6ia41osm9sk31hawy5fo9c6n4rabt4dbkt6orhap54z9rejs4qrsmgcdeyx5akcqzwkbeg58ktynubxbdssrje41nzkhg79uoth9jntbrdj3dkgesowqtzm6f76ksfmm5irpys7h1bsiou
   AadAuthorization: 
-  SelectedStudio: 
+  SelectedStudio: _OVERRIDE_
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
+  curMainMenuIdx: 1
   curSubMenuIdx: 0
