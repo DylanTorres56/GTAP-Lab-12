@@ -4,7 +4,7 @@ using UnityEngine;
 using PlayFab.ClientModels;
 using PlayFab;
 
-public class PlayFabManager
+public class PlayFabManager: MonoBehaviour
 {
     private LoginManager loginManager;
     private string savedEmailKey = "SavedEmail";
